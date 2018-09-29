@@ -15,7 +15,6 @@ struct empty_type {
 
     static void destroy(empty_type &instance) {
         ++counter;
-        instance.~empty_type();
     }
 
     inline static int counter = 0;
@@ -1172,7 +1171,11 @@ TEST_F(Meta, MetaTypeConstructCastAndConvert) {
 
 
 TEST_F(Meta, MetaTypeDestroyDtor) {
-    // TODO
+    auto *type = entt::resolve<empty_type>();
+
+    ASSERT_EQ(empty_type::counter, 0);
+    type->destroy(empty_type{});
+    ASSERT_EQ(empty_type::counter, 1);
 }
 
 TEST_F(Meta, MetaTypeDestroyDtorInvalidArg) {
