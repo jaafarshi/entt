@@ -102,6 +102,9 @@ endif()
 
 target_compile_features(EnTT INTERFACE cxx_std_14)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 #
 # Install EnTT
 #
